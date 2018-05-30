@@ -15,8 +15,8 @@ Train SRL models on CoNLL-09 SRL training sets and test/evaluate trained models 
 
 ### Testing Environment
 
-Language: Python 2.7  
-CUDA: Cuda compilation tools, release 8.0, V8.0.44  
+Language : Python 2.7  
+CUDA     : Cuda compilation tools, release 8.0, V8.0.44  
 Libraries: PyTorch 0.2.0 post 3, numpy 1.13.0
 
 
