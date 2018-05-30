@@ -1,0 +1,16 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.pyc
+data/
+model/
+experiments/
+deneme_*/
+model_srl/
+deneme/
+.idea/
+*.pt
+*.txt
+*.sh
+*.log
+*.pkl
+*.bin
+!/example_scripts/*
