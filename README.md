@@ -1,6 +1,6 @@
 ## Semantic Role Labeling with subword composition
 
-The code for our ACL18 paper ["Character-Level Models versus Morphology in Semantic Role Labeling"](https://arxiv.org/abs/1805.11937) by Gözde Gül Şahin and Mark Steedman.
+The code for our ACL18 paper ["Character-Level Models versus Morphology in Semantic Role Labeling"](https://arxiv.org/abs/1805.11937).
 
 We provide sample training/testing scripts for different subword units under example_scripts folder.
 
