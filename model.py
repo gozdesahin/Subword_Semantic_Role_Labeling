@@ -18,6 +18,10 @@ import numpy as np
 
 from IO.util import *
 
+use_cuda = torch.cuda.is_available()
+dtype = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
+otype = torch.cuda.LongTensor if use_cuda else torch.LongTensor
+
 class SRL(nn.Module):
     """
         Encoder: f(word embedding from subword model)
