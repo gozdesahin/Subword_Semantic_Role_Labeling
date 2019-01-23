@@ -9,6 +9,7 @@ Evaluate predicted labels by comparing to gold labels
 
 import torch
 from itertools import chain
+import sys
 
 use_cuda = torch.cuda.is_available()
 dtype = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
@@ -33,9 +34,9 @@ def evalConll(pred_labels, gold_labels, dummyrole, stoprole, role_to_ix, mode, t
     :return: glst: gold label list
     :return: num_corr,num_found,num_gold : correctly found, total found argument count, total gold
     """
-    num_corr = 0
-    num_gold = 0
-    num_found = 0
+    num_corr = 0.
+    num_gold = 0.
+    num_found = 0.
     # local lists
     plst = []
     glst = []
@@ -82,7 +83,7 @@ def testRoleLabels(model, data, role_to_ix, mode="eval", type="simple"):
     :return:
     """
     total_corr = 0.
-    total_found = 0.
+    total_found = sys.float_info.epsilon
     total_gold = 0.
 
     predictionslst = []

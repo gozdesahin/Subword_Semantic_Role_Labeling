@@ -90,7 +90,7 @@ def main():
 
     ### Word Embedding Options
     parser.add_argument('-pre_word_vecs', default=None, help="If a valid path is specified, then this will load pretrained word embeddings.")
-    parser.add_argument('-w2vtype', help="[glove|sskip|w2v]")
+    parser.add_argument('-w2vtype', default='fasttext', help="[glove|sskip|w2v|fasttext]")
     parser.add_argument('-fixed_embed', dest='fixed_embed', default=False, action='store_true', help='If True, word embeddings will not be fine tuned')
     parser.add_argument('-word_vec_size', type=int, default=50, help='Word embedding size, overwritten by supplied pre_word_vecs size')
 
@@ -167,6 +167,24 @@ def main():
     if use_cuda:
         torch.cuda.set_device(opt.gpuid)
 
+    localtest = False
+    if localtest:
+        opt.train_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-German/CoNLL2009-ST-German-train.txt'
+        opt.val_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-German/CoNLL2009-ST-German-development.txt'
+        opt.pre_word_vecs = '/home/sahin/Workspace/Projects/invertible_NNs/datasets/nlp/wiki.de/wiki.de'
+        opt.word_dim = 300
+        opt.batch_size = 32
+        opt.w2vtype = 'fasttext'
+        opt.fixed_embed = True
+        opt.unit = 'word'
+        opt.composition = 'none'
+        opt.epochs = 20
+        opt.hidden_size = 128
+        opt.layers = 2
+        opt.optim = 'sgd'
+        opt.learning_rate = 1
+
+
     train(opt)
 
 def train(opt):
@@ -187,19 +205,24 @@ def train(opt):
     opt.use_predicted = True if opt.predicted=="true" else False
 
     if opt.pre_word_vecs != None:
-        zipname = None
-        # Only load the first 500K words
-        maxvocsize = 500000
-        w2i, ems = w2v.loadw2v(opt.pre_word_vecs, opt.word_vec_size, myzipfile=zipname, maxvoc=maxvocsize)
-        if opt.word_vec_size != len(ems[0]):
-            opt.word_vec_size = len(ems[0])
+        if opt.w2vtype in ['glove', 'sskip', 'w2v']:
+            zipname = None
+            # Only load the first 500K words
+            maxvocsize = 500000
+            w2i, ems = w2v.loadw2v(opt.pre_word_vecs, opt.word_vec_size, myzipfile=zipname, maxvoc=maxvocsize)
+            if opt.word_vec_size != len(ems[0]):
+                opt.word_vec_size = len(ems[0])
+        elif opt.w2vtype=='fasttext':
+            w2i, ems = w2v.loadft(opt.pre_word_vecs)
+            opt.word_vec_size = 300
     else:
         ems = None
 
     # word indexer depends on the vocabulary
-    if opt.pre_word_vecs != None:
+    if (opt.pre_word_vecs != None) and (opt.w2vtype!='fasttext'):
         word_to_ix = w2i
     else:
+        # fasttext will handle OOV words, so do not fill a fixed vocabulary
         word_to_ix = None
 
     # write log to train.log
@@ -273,7 +296,6 @@ def train(opt):
     else:
         # process each epoch
         e = 1
-
 
     bestF1 = 0.0
 

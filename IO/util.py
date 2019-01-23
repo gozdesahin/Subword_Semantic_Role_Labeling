@@ -60,10 +60,12 @@ def writeScores(total_corr, total_found, total_gold, fout):
     :return:
     """
     # to pretend division by zero
-    total_found += sys.float_info.epsilon
-    pr = total_corr/float(total_found)
-    re = total_corr/float(total_gold)
-    f1 = (2*pr*re)/(pr+re+sys.float_info.epsilon)
+    total_found = float(total_found)+sys.float_info.epsilon
+    total_corr = float(total_corr)
+    total_gold = float(total_gold)
+    pr = total_corr/total_found
+    re = total_corr/total_gold
+    f1 = (2.0*pr*re)/(pr+re+sys.float_info.epsilon)
 
     fout.write("Argument Labeling: Precision: %.3f Recall: %.3f F1: %3f \n" % (pr, re, f1))
     print("Argument Labeling: Precision: %.3f Recall: %.3f F1: %3f " % (pr, re, f1))

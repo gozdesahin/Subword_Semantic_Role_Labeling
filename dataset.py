@@ -14,7 +14,7 @@ import torch
 
 class Dataset(object):
 
-    def __init__(self, srcData, lblData, batchSize, cuda, volatile=False):
+    def __init__(self, srcData, lblData, batchSize, cuda, ft=False, volatile=False):
         """
 
         :param srcData: Source data, word, subwords and predicate flag (binary mark)
@@ -27,6 +27,9 @@ class Dataset(object):
         self.subs = srcData[1]
         self.bm = srcData[2]
         self.predwrd = srcData[3]
+
+        # use fasttext
+        self.useft = ft
 
         if lblData:
             self.role = lblData[0]
@@ -42,7 +45,7 @@ class Dataset(object):
         self.volatile = volatile
 
     def _batchify_all(self, data):
-        return(self._batchify(data[0]),
+        return(self._batchify_word(data[0]),
                self._batchify_vec(data[1]),
                self._batchify(data[2]),
                self._batchify(data[3]))
@@ -62,9 +65,21 @@ class Dataset(object):
         v = Variable(out, volatile=self.volatile)
         return v
 
+    def _batchify_word(self, data, padding=constants.PAD):
+        if not self.useft:
+            self._batchify(self, data, padding)
+        else:
+            max_length = max(len(x) for x in data)
+            padding = u'<UNK>'
+            for i, sent in enumerate(data):
+                if(len(sent)<max_length):
+                    for j in range(len(sent),max_length):
+                        data[i].append(padding)
+            return data
+
     def _batchify_vec(self, data,  padding=constants.PAD):
         # return empty if the unit is word (data is not a vector)
-        if type(data[0][0])==int:
+        if len(data[0][0].shape)==0:
             return []
         # max sentence length (number of words)
         max_length = max(x.size(0) for x in data)

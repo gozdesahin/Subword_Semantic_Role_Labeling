@@ -80,6 +80,7 @@ class Loader():
         self.c9sents = None
         self.train = train
         self.test = test
+        self.ft_embeds = (opt.w2vtype == 'fasttext')
 
         self.role_vocab_file = os.path.join(save_dir, "role_vocab.pkl")
         self.word_vocab_file = os.path.join(save_dir, "words_vocab.pkl")
@@ -233,6 +234,7 @@ class Loader():
         :return: dataset object - ready to batch
         """
         dataTok = []
+        dataDebug = []
         dataSub = []
         dataBM = []
         dataPW = []
@@ -243,8 +245,14 @@ class Loader():
             # predicate to lower
             predWord[0] = predWord[0].lower()
             # 1) token
+            # if fasttext, pass the words itself
+            if self.ft_embeds:
+                dataTok.append(sentence)
+            else:
+                word_embed_ind = prepare_sequence(sentence, self.word_to_ix)
+                dataTok.append(word_embed_ind)
             word_embed_ind = prepare_sequence(sentence, self.word_to_ix)
-            dataTok.append(word_embed_ind)
+            dataDebug.append(word_embed_ind)
             # 2) subword of your choice (comes already padded)
             if self.subloader.unit == "oracle":
                 sub_encoded = self.subloader.encode_data(morph_anal)
@@ -265,11 +273,9 @@ class Loader():
         # When the model type is simple, we pad the label sequence with zero
         if train:
             dset = Dataset([dataTok, dataSub, dataBM, dataPW], [dataRole],
-                           self.options.batch_size, use_cuda)
+                           self.options.batch_size, use_cuda, self.ft_embeds)
         else:
             dset = Dataset([dataTok, dataSub, dataBM, dataPW], [dataRole],
-                           self.options.batch_size, use_cuda, volatile=True)
+                           self.options.batch_size, use_cuda, self.ft_embeds, volatile=True)
         del dataTok, dataBM, dataPW, dataRole
         return dset
-
-

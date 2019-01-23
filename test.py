@@ -28,6 +28,14 @@ def main():
                         help='data type (test|dev|ood)')
     parser.add_argument('-gpuid', type=int, default=0, help='Id of the GPU to run')
     args = parser.parse_args()
+
+    localtest = False
+    if localtest:
+        args.test_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-Turkish/CoNLL2009-ST-evaluation-Turkish.txt'
+        args.save_dir = 'model_srl'
+        args.lang = 'tur'
+        args.dt = 'test'
+
     test(args)
 
 def test(test_args):

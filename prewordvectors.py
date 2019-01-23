@@ -9,6 +9,7 @@ Load pretrained embeddings
 import zipfile
 import constants
 import numpy as np
+from gensim.models import FastText as fText
 
 def loadw2v(embfile, embsize, myzipfile=None, maxvoc=200000):
     """
@@ -38,7 +39,14 @@ def loadw2v(embfile, embsize, myzipfile=None, maxvoc=200000):
         if ix >= maxvoc:
             break
         splitLine = line.split()
-        if(len(splitLine)>2):
+        if(len(splitLine)>embsize+1):
+            phrase_lst = splitLine[:-embsize]
+            word = ' '.join(phrase_lst)
+            embedding = [float(val) for val in splitLine[-embsize:]]
+            word_to_ix[word] = ix
+            model.append(embedding)
+            ix += 1
+        elif(len(splitLine)>2):
             word = splitLine[0]
             embedding = [float(val) for val in splitLine[1:]]
             word_to_ix[word]=ix
@@ -47,4 +55,12 @@ def loadw2v(embfile, embsize, myzipfile=None, maxvoc=200000):
         else:
             print line
     print("%d words loaded!" % len(model))
+    return word_to_ix, model
+
+
+def loadft(embfile):
+    # load fasttext model with fixed vocab
+    model = fText.load_fasttext_format(embfile)
+    # this will be a filled from the training data
+    word_to_ix = None
     return word_to_ix, model

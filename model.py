@@ -13,6 +13,8 @@ import torch.autograd as autograd
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.init as nninit
+from torch.autograd import Variable
+import numpy as np
 
 from IO.util import *
 
@@ -28,9 +30,10 @@ class SRL(nn.Module):
         # Calculate the input feature size with given subword unit
         # and pretrained word embedding information
         if (args.pre_word_vecs != None) and args.unit == "word":
-            args.word_vec_size = self.word_dim
+            self.word_dim = args.word_vec_size
 
         self.inputFeatSize = self.get_input_dim(args)
+        self.ft_embeds = (args.w2vtype=='fasttext')
 
         # SRL LSTM and hidden2tag parameters
         self.hidden_dim = args.hidden_size
@@ -42,9 +45,13 @@ class SRL(nn.Module):
 
         # if you want to use pretrained word vectors
         if (args.pre_word_vecs != None) or args.unit == "word":
-            self.wordEmbeddings = nn.Embedding(args.vocab_size, args.word_vec_size, padding_idx=0)
+            if self.ft_embeds and ems!=None:
+                # use fasttext type embeddings
+                self.wordEmbeddings = ems
+            else:
+                self.wordEmbeddings = nn.Embedding(args.vocab_size, args.word_vec_size, padding_idx=0)
             self.word_vec_size = args.word_vec_size
-            if args.fixed_embed:
+            if args.fixed_embed and not self.ft_embeds:
                 self.wordEmbeddings.weight.requires_grad = False
         else:
             self.wordEmbeddings = None
@@ -81,7 +88,7 @@ class SRL(nn.Module):
                 self.subwordModel = self.subwordModel.cuda()
 
         # initialize word embeddings
-        if ems != None:
+        if (ems != None) and not self.ft_embeds:
             # init embeddings from pretrained vectors
             self.wordEmbeddings.weight.data.copy_(torch.FloatTensor(ems).type(dtype))
 
@@ -104,6 +111,48 @@ class SRL(nn.Module):
             inputFeatSize += args.word_vec_size
         return inputFeatSize
 
+    def word_by_word_retr(self, sent):
+        # check word by word
+        first_word = sent[0]
+
+        try:
+            batch_word_embed = self.wordEmbeddings[first_word]
+        except:
+            batch_word_embed = self.wordEmbeddings[u'<UNK>']
+
+        # initialize batch_sent_emb with the first word's embedding
+        batch_sent_emb = batch_word_embed
+        for i in range(1,len(sent)):
+            word = sent[i]
+            try:
+                batch_word_embed = self.wordEmbeddings[word]
+            except:
+                batch_word_embed = self.wordEmbeddings[u'<UNK>']
+            batch_sent_emb = np.vstack((batch_sent_emb, batch_word_embed))
+        return batch_sent_emb
+
+
+    def get_fasttext_embed(self, sents):
+        try:
+            batch_sent_embs = self.wordEmbeddings[sents[0]]
+        except:
+            batch_sent_embs = self.word_by_word_retr(sents[0])
+
+        for i in range(1,len(sents)):
+            sent = sents[i]
+            try:
+                emb_for_sent = self.wordEmbeddings[sent]
+            except:
+                emb_for_sent = self.word_by_word_retr(sent)
+
+            batch_sent_embs = np.concatenate((batch_sent_embs, emb_for_sent))
+
+        we_tensors = torch.FloatTensor(batch_sent_embs)
+        if self.use_cuda:
+            we_tensors = we_tensors.cuda()
+        v = Variable(we_tensors, requires_grad=False)
+        return v
+
     def get_input_repr(self, batch):
         word_ind = batch[0]
         pred_mark_feat = batch[2]
@@ -117,8 +166,14 @@ class SRL(nn.Module):
             inputfeat = torch.cat((word_embeds_from_sub, inputfeat), 2)
 
         if (self.wordEmbeddings != None):
-            pretr_embeds = self.wordEmbeddings(word_ind)
-            inputfeat = torch.cat((pretr_embeds, inputfeat), 2)
+            if not self.ft_embeds:
+                pretr_embeds = self.wordEmbeddings(word_ind)
+                inputfeat = torch.cat((pretr_embeds, inputfeat), 2)
+            # if it is fasttext embeddings, we get batches of words instead of integer indices
+            else:
+                pretr_embeds = self.get_fasttext_embed(word_ind)
+                batch_embeds = pretr_embeds.view(self.batch_size, -1, self.word_dim)
+                inputfeat = torch.cat((batch_embeds, inputfeat), 2)
 
         return inputfeat
 
