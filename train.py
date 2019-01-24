@@ -209,8 +209,8 @@ def train(opt):
         if opt.w2vtype in ['glove', 'sskip', 'w2v']:
             zipname = None
             # Only load the first 500K words
-            #maxvocsize = 500
-            w2i, ems = w2v.loadw2v(opt.pre_word_vecs, opt.word_vec_size, myzipfile=zipname)
+            maxvocsize = 500000
+            w2i, ems = w2v.loadw2v(opt.pre_word_vecs, opt.word_vec_size, myzipfile=zipname, maxvoc=maxvocsize)
             if opt.word_vec_size != len(ems[0]):
                 opt.word_vec_size = len(ems[0])
         elif opt.w2vtype=='fasttext':
