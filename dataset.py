@@ -67,7 +67,8 @@ class Dataset(object):
 
     def _batchify_word(self, data, padding=constants.PAD):
         if not self.useft:
-            self._batchify(data)
+            v = self._batchify(data)
+            return v
         else:
             max_length = max(len(x) for x in data)
             padding = u'<UNK>'

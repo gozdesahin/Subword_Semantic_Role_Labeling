@@ -234,7 +234,6 @@ class Loader():
         :return: dataset object - ready to batch
         """
         dataTok = []
-        dataDebug = []
         dataSub = []
         dataBM = []
         dataPW = []
@@ -251,8 +250,6 @@ class Loader():
             else:
                 word_embed_ind = prepare_sequence(sentence, self.word_to_ix)
                 dataTok.append(word_embed_ind)
-            word_embed_ind = prepare_sequence(sentence, self.word_to_ix)
-            dataDebug.append(word_embed_ind)
             # 2) subword of your choice (comes already padded)
             if self.subloader.unit == "oracle":
                 sub_encoded = self.subloader.encode_data(morph_anal)

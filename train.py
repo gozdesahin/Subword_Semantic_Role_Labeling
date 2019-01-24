@@ -173,6 +173,7 @@ def main():
         opt.val_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-German/CoNLL2009-ST-German-development.txt'
         opt.pre_word_vecs = '/home/sahin/Workspace/Projects/invertible_NNs/datasets/nlp/wiki.de/wiki.de'
         opt.word_dim = 300
+        opt.word_vec_size = 300
         opt.batch_size = 32
         opt.w2vtype = 'fasttext'
         opt.fixed_embed = True
@@ -208,7 +209,7 @@ def train(opt):
         if opt.w2vtype in ['glove', 'sskip', 'w2v']:
             zipname = None
             # Only load the first 500K words
-            maxvocsize = 500000
+            maxvocsize = 500
             w2i, ems = w2v.loadw2v(opt.pre_word_vecs, opt.word_vec_size, myzipfile=zipname, maxvoc=maxvocsize)
             if opt.word_vec_size != len(ems[0]):
                 opt.word_vec_size = len(ems[0])
