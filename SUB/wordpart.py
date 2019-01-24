@@ -47,7 +47,7 @@ class TextLoader:
         self.max_word_len = 0
         self.subword_vocab_size = 0
         self.word_vocab_size = 0
-        self.max_vocab_size = 1000000
+        self.max_vocab_size = 500000
 
         # Dictionaries and lists
         self.char_to_id = dict()
