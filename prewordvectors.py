@@ -11,7 +11,7 @@ import constants
 import numpy as np
 from gensim.models import FastText as fText
 
-def loadw2v(embfile, embsize, myzipfile=None, maxvoc=200000):
+def loadw2v(embfile, embsize, myzipfile=None, maxvoc=None):
     """
     Load pretrained embeddings from text or a zip file
     Index 0 is for padding
@@ -36,8 +36,9 @@ def loadw2v(embfile, embsize, myzipfile=None, maxvoc=200000):
         f = open(embfile, 'r')
     ix = 2
     for line in f:
-        if ix >= maxvoc:
-            break
+        if maxvoc!=None:
+            if ix >= maxvoc:
+                break
         splitLine = line.split()
         if(len(splitLine)>embsize+1):
             phrase_lst = splitLine[:-embsize]
