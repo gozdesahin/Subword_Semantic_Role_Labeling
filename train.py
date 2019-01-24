@@ -325,7 +325,7 @@ def train(opt):
         diff = f1 - bestF1
         if diff >= 0.01:
             if opt.save_states=="true":
-                torch.save(mtrain,'%s/%s-%d.pt' % (save_dir, "model", e))
+                torch.save(mtrain,'%s/%s-%d.pt' % (save_dir, "model", e), pickle_protocol=4)
             bestF1 = f1
 
         # write results to file
