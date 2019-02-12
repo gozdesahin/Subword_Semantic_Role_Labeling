@@ -90,7 +90,7 @@ def main():
 
     ### Word Embedding Options
     parser.add_argument('-pre_word_vecs', default=None, help="If a valid path is specified, then this will load pretrained word embeddings.")
-    parser.add_argument('-w2vtype', default='fasttext', help="[glove|sskip|w2v|fasttext]")
+    parser.add_argument('-w2vtype', default='w2v', help="[glove|sskip|w2v|fasttext]")
     parser.add_argument('-fixed_embed', dest='fixed_embed', default=False, action='store_true', help='If True, word embeddings will not be fine tuned')
     parser.add_argument('-word_vec_size', type=int, default=50, help='Word embedding size, overwritten by supplied pre_word_vecs size')
 
@@ -169,19 +169,19 @@ def main():
 
     localtest = False
     if localtest:
-        opt.train_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-German/CoNLL2009-ST-German-train.txt'
-        opt.val_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-German/CoNLL2009-ST-German-development.txt'
-        opt.pre_word_vecs = '/home/sahin/Workspace/Projects/invertible_NNs/datasets/nlp/wiki.de/wiki.de'
+        opt.train_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-Turkish/CoNLL2009-ST-Turkish-train.txt'
+        opt.val_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-Turkish/CoNLL2009-ST-Turkish-development.txt'
+        opt.pre_word_vecs = '/home/sahin/Workspace/Projects/dataset_compilation/saved_embeddings/extrinsic_lower/tr/fasttext/final_embeds.vec'
         opt.word_dim = 300
         opt.word_vec_size = 300
         opt.batch_size = 32
-        opt.w2vtype = 'fasttext'
+        opt.w2vtype = 'w2v'
         opt.fixed_embed = True
         opt.unit = 'word'
         opt.composition = 'none'
         opt.epochs = 20
-        opt.hidden_size = 128
-        opt.layers = 2
+        opt.hidden_size = 32
+        opt.layers = 1
         opt.optim = 'sgd'
         opt.learning_rate = 1
 
@@ -209,7 +209,7 @@ def train(opt):
         if opt.w2vtype in ['glove', 'sskip', 'w2v']:
             zipname = None
             # Only load the first 500K words
-            maxvocsize = 500000
+            maxvocsize = None
             w2i, ems = w2v.loadw2v(opt.pre_word_vecs, opt.word_vec_size, myzipfile=zipname, maxvoc=maxvocsize)
             if opt.word_vec_size != len(ems[0]):
                 opt.word_vec_size = len(ems[0])
@@ -325,7 +325,7 @@ def train(opt):
         diff = f1 - bestF1
         if diff >= 0.01:
             if opt.save_states=="true":
-                torch.save(mtrain,'%s/%s-%d.pt' % (save_dir, "model", e), pickle_protocol=4)
+                torch.save(mtrain,'%s/%s-%d.pt' % (save_dir, "model", e))
             bestF1 = f1
 
         # write results to file

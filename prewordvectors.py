@@ -9,6 +9,8 @@ Load pretrained embeddings
 import zipfile
 import constants
 import numpy as np
+import codecs
+
 from gensim.models import FastText as fText
 
 def loadw2v(embfile, embsize, myzipfile=None, maxvoc=None):
@@ -33,7 +35,8 @@ def loadw2v(embfile, embsize, myzipfile=None, maxvoc=None):
         zip = zipfile.ZipFile(myzipfile, 'r')
         f = zip.read(embfile).split("\n")
     else:
-        f = open(embfile, 'r')
+        #f = open(embfile, 'r')
+        f = codecs.open(embfile, "r", "utf-8")
     ix = 2
     for line in f:
         if maxvoc!=None:
