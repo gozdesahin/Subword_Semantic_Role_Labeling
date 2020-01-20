@@ -57,7 +57,7 @@ def loadw2v(embfile, embsize, myzipfile=None, maxvoc=None):
             model.append(embedding)
             ix += 1
         else:
-            print line
+            print(line)
     print("%d words loaded!" % len(model))
     return word_to_ix, model
 

@@ -1,0 +1,400 @@
+  SYNTACTIC SCORES:
+  Labeled   attachment score: 9337 / 9337 * 100 = 100.00 %
+  Unlabeled attachment score: 9337 / 9337 * 100 = 100.00 %
+  Label accuracy score:       9337 / 9337 * 100 = 100.00 %
+  Exact syntactic match:      842 / 842 * 100 = 100.00 %
+
+  SEMANTIC SCORES: 
+  Labeled precision:          (692 + 1757) / (1483 + 1757) * 100 = 75.59 %
+  Labeled recall:             (692 + 1757) / (3180 + 1757) * 100 = 49.61 %
+  Labeled F1:                 59.90 
+  Unlabeled precision:        (1353 + 1757) / (1483 + 1757) * 100 = 95.99 %
+  Unlabeled recall:           (1353 + 1757) / (3180 + 1757) * 100 = 62.99 %
+  Unlabeled F1:               76.07 
+  Proposition precision:      349 / 1757 * 100 = 19.86 %
+  Proposition recall:         349 / 1757 * 100 = 19.86 %
+  Proposition F1:             19.86 
+  Exact semantic match:       133 / 842 * 100 = 15.80 %
+
+  OVERALL MACRO SCORES (Wsem = 0.50):
+  Labeled macro precision:    87.79 %
+  Labeled macro recall:       74.80 %
+  Labeled macro F1:           80.78 %
+  Unlabeled macro precision:  97.99 %
+  Unlabeled macro recall:     81.50 %
+  Unlabeled macro F1:         88.99 %
+  Exact overall match:        133 / 842 * 100 = 15.80 %
+
+  OVERALL MICRO SCORES:
+  Labeled micro precision:    (9337 + 692 + 1757) / (9337 + 1483 + 1757) * 100 = 93.71 %
+  Labeled micro recall:       (9337 + 692 + 1757) / (9337 + 3180 + 1757) * 100 = 82.57 %
+  Labeled micro F1:           87.79 
+  Unlabeled micro precision:  (9337 + 1353 + 1757) / (9337 + 1483 + 1757) * 100 = 98.97 %
+  Unlabeled micro recall:     (9337 + 1353 + 1757) / (9337 + 3180 + 1757) * 100 = 87.20 %
+  Unlabeled micro F1:         92.71 
+
+  ================================================================================
+
+  Evaluation of the syntactic results in ./temp/system_test.conll
+  vs. gold standard ./temp/goldTest_test.conll:
+
+  Legend: '.S' - the beginning of a sentence, '.E' - the end of a sentence
+
+  Number of non-scoring tokens: 0
+
+  The overall accuracy and its distribution over PPOSS tags
+
+  -----------+-------+-------+------+-------+------+-------+-------
+  Accuracy   | words | right |   %  | right |   %  | both  |   %
+             |       | head  |      |  dep  |      | right |
+  -----------+-------+-------+------+-------+------+-------+-------
+  total      |  9337 |  9337 | 100% |  9337 | 100% |  9337 | 100%
+  -----------+-------+-------+------+-------+------+-------+-------
+  Noun       |  2272 |  2272 | 100% |  2272 | 100% |  2272 | 100%
+  Verb       |  1606 |  1606 | 100% |  1606 | 100% |  1606 | 100%
+  Punc       |  1514 |  1514 | 100% |  1514 | 100% |  1514 | 100%
+  Adj        |   457 |   457 | 100% |   457 | 100% |   457 | 100%
+  NAdj       |   416 |   416 | 100% |   416 | 100% |   416 | 100%
+  Conj       |   364 |   364 | 100% |   364 | 100% |   364 | 100%
+  Adverb     |   341 |   341 | 100% |   341 | 100% |   341 | 100%
+  Num        |   289 |   289 | 100% |   289 | 100% |   289 | 100%
+  Prop       |   284 |   284 | 100% |   284 | 100% |   284 | 100%
+  Pers       |   198 |   198 | 100% |   198 | 100% |   198 | 100%
+  PastPart   |   186 |   186 | 100% |   186 | 100% |   186 | 100%
+  Zero       |   159 |   159 | 100% |   159 | 100% |   159 | 100%
+  Det        |   146 |   146 | 100% |   146 | 100% |   146 | 100%
+  Inf2       |   140 |   140 | 100% |   140 | 100% |   140 | 100%
+  PresPart   |   130 |   130 | 100% |   130 | 100% |   130 | 100%
+  PCNom      |   122 |   122 | 100% |   122 | 100% |   122 | 100%
+  Ques       |    69 |    69 | 100% |    69 | 100% |    69 | 100%
+  Inf1       |    64 |    64 | 100% |    64 | 100% |    64 | 100%
+  Demons     |    57 |    57 | 100% |    57 | 100% |    57 | 100%
+  PCDat      |    56 |    56 | 100% |    56 | 100% |    56 | 100%
+  Rel        |    52 |    52 | 100% |    52 | 100% |    52 | 100%
+  FutPart    |    45 |    45 | 100% |    45 | 100% |    45 | 100%
+  AfterDoingSo |    40 |    40 | 100% |    40 | 100% |    40 | 100%
+  With       |    40 |    40 | 100% |    40 | 100% |    40 | 100%
+  PCAbl      |    35 |    35 | 100% |    35 | 100% |    35 | 100%
+  Quant      |    28 |    28 | 100% |    28 | 100% |    28 | 100%
+  Reflex     |    28 |    28 | 100% |    28 | 100% |    28 | 100%
+  NarrPart   |    23 |    23 | 100% |    23 | 100% |    23 | 100%
+  ByDoingSo  |    21 |    21 | 100% |    21 | 100% |    21 | 100%
+  Abr        |    15 |    15 | 100% |    15 | 100% |    15 | 100%
+  Ness       |    14 |    14 | 100% |    14 | 100% |    14 | 100%
+  Neg        |    13 |    13 | 100% |    13 | 100% |    13 | 100%
+  AorPart    |    13 |    13 | 100% |    13 | 100% |    13 | 100%
+  When       |    12 |    12 | 100% |    12 | 100% |    12 | 100%
+  While      |    12 |    12 | 100% |    12 | 100% |    12 | 100%
+  Acquire    |    11 |    11 | 100% |    11 | 100% |    11 | 100%
+  Interj     |    10 |    10 | 100% |    10 | 100% |    10 | 100%
+  Without    |     9 |     9 | 100% |     9 | 100% |     9 | 100%
+  WithoutHavingDoneSo |     8 |     8 | 100% |     8 | 100% |     8 | 100%
+  Ly         |     8 |     8 | 100% |     8 | 100% |     8 | 100%
+  Agt        |     4 |     4 | 100% |     4 | 100% |     4 | 100%
+  AsLongAs   |     4 |     4 | 100% |     4 | 100% |     4 | 100%
+  AsIf       |     4 |     4 | 100% |     4 | 100% |     4 | 100%
+  Dup        |     4 |     4 | 100% |     4 | 100% |     4 | 100%
+  PCIns      |     3 |     3 | 100% |     3 | 100% |     3 | 100%
+  Dim        |     2 |     2 | 100% |     2 | 100% |     2 | 100%
+  Postp      |     2 |     2 | 100% |     2 | 100% |     2 | 100%
+  SinceDoingSo |     2 |     2 | 100% |     2 | 100% |     2 | 100%
+  Related    |     1 |     1 | 100% |     1 | 100% |     1 | 100%
+  PCGen      |     1 |     1 | 100% |     1 | 100% |     1 | 100%
+  Adamantly  |     1 |     1 | 100% |     1 | 100% |     1 | 100%
+  Since      |     1 |     1 | 100% |     1 | 100% |     1 | 100%
+  WithoutBeingAbleToHaveDoneSo |     1 |     1 | 100% |     1 | 100% |     1 | 100%
+  -----------+-------+-------+------+-------+------+-------+-------
+
+
+  The overall error rate and its distribution over PPOSS tags
+
+  -----------+-------+-------+------+-------+------+-------+-------
+  Error      | words | head  |   %  |  dep  |   %  | both  |   %
+  Rate       |       | err   |      |  err  |      | wrong |
+  -----------+-------+-------+------+-------+------+-------+-------
+  total      |  9337 |     0 |   0% |     0 |   0% |     0 |   0%
+  -----------+-------+-------+------+-------+------+-------+-------
+  Noun       |  2272 |     0 |   0% |     0 |   0% |     0 |   0%
+  Verb       |  1606 |     0 |   0% |     0 |   0% |     0 |   0%
+  Punc       |  1514 |     0 |   0% |     0 |   0% |     0 |   0%
+  Adj        |   457 |     0 |   0% |     0 |   0% |     0 |   0%
+  NAdj       |   416 |     0 |   0% |     0 |   0% |     0 |   0%
+  Conj       |   364 |     0 |   0% |     0 |   0% |     0 |   0%
+  Adverb     |   341 |     0 |   0% |     0 |   0% |     0 |   0%
+  Num        |   289 |     0 |   0% |     0 |   0% |     0 |   0%
+  Prop       |   284 |     0 |   0% |     0 |   0% |     0 |   0%
+  Pers       |   198 |     0 |   0% |     0 |   0% |     0 |   0%
+  PastPart   |   186 |     0 |   0% |     0 |   0% |     0 |   0%
+  Zero       |   159 |     0 |   0% |     0 |   0% |     0 |   0%
+  Det        |   146 |     0 |   0% |     0 |   0% |     0 |   0%
+  Inf2       |   140 |     0 |   0% |     0 |   0% |     0 |   0%
+  PresPart   |   130 |     0 |   0% |     0 |   0% |     0 |   0%
+  PCNom      |   122 |     0 |   0% |     0 |   0% |     0 |   0%
+  Ques       |    69 |     0 |   0% |     0 |   0% |     0 |   0%
+  Inf1       |    64 |     0 |   0% |     0 |   0% |     0 |   0%
+  Demons     |    57 |     0 |   0% |     0 |   0% |     0 |   0%
+  PCDat      |    56 |     0 |   0% |     0 |   0% |     0 |   0%
+  Rel        |    52 |     0 |   0% |     0 |   0% |     0 |   0%
+  FutPart    |    45 |     0 |   0% |     0 |   0% |     0 |   0%
+  AfterDoingSo |    40 |     0 |   0% |     0 |   0% |     0 |   0%
+  With       |    40 |     0 |   0% |     0 |   0% |     0 |   0%
+  PCAbl      |    35 |     0 |   0% |     0 |   0% |     0 |   0%
+  Quant      |    28 |     0 |   0% |     0 |   0% |     0 |   0%
+  Reflex     |    28 |     0 |   0% |     0 |   0% |     0 |   0%
+  NarrPart   |    23 |     0 |   0% |     0 |   0% |     0 |   0%
+  ByDoingSo  |    21 |     0 |   0% |     0 |   0% |     0 |   0%
+  Abr        |    15 |     0 |   0% |     0 |   0% |     0 |   0%
+  Ness       |    14 |     0 |   0% |     0 |   0% |     0 |   0%
+  Neg        |    13 |     0 |   0% |     0 |   0% |     0 |   0%
+  AorPart    |    13 |     0 |   0% |     0 |   0% |     0 |   0%
+  When       |    12 |     0 |   0% |     0 |   0% |     0 |   0%
+  While      |    12 |     0 |   0% |     0 |   0% |     0 |   0%
+  Acquire    |    11 |     0 |   0% |     0 |   0% |     0 |   0%
+  Interj     |    10 |     0 |   0% |     0 |   0% |     0 |   0%
+  Without    |     9 |     0 |   0% |     0 |   0% |     0 |   0%
+  WithoutHavingDoneSo |     8 |     0 |   0% |     0 |   0% |     0 |   0%
+  Ly         |     8 |     0 |   0% |     0 |   0% |     0 |   0%
+  Agt        |     4 |     0 |   0% |     0 |   0% |     0 |   0%
+  AsLongAs   |     4 |     0 |   0% |     0 |   0% |     0 |   0%
+  AsIf       |     4 |     0 |   0% |     0 |   0% |     0 |   0%
+  Dup        |     4 |     0 |   0% |     0 |   0% |     0 |   0%
+  PCIns      |     3 |     0 |   0% |     0 |   0% |     0 |   0%
+  Dim        |     2 |     0 |   0% |     0 |   0% |     0 |   0%
+  Postp      |     2 |     0 |   0% |     0 |   0% |     0 |   0%
+  SinceDoingSo |     2 |     0 |   0% |     0 |   0% |     0 |   0%
+  Related    |     1 |     0 |   0% |     0 |   0% |     0 |   0%
+  PCGen      |     1 |     0 |   0% |     0 |   0% |     0 |   0%
+  Adamantly  |     1 |     0 |   0% |     0 |   0% |     0 |   0%
+  Since      |     1 |     0 |   0% |     0 |   0% |     0 |   0%
+  WithoutBeingAbleToHaveDoneSo |     1 |     0 |   0% |     0 |   0% |     0 |   0%
+  -----------+-------+-------+------+-------+------+-------+-------
+
+
+  Precision and recall of DEPREL
+
+  ----------------+------+---------+--------+------------+---------------
+  deprel          | gold | correct | system | recall (%) | precision (%) 
+  ----------------+------+---------+--------+------------+---------------
+  APPOSITION      |   13 |      13 |     13 |     100.00 |        100.00
+  ARGUMENT        |  262 |     262 |    262 |     100.00 |        100.00
+  CONJUNCTION     |  217 |     217 |    217 |     100.00 |        100.00
+  COORDINATION    |  450 |     450 |    450 |     100.00 |        100.00
+  DERIV           | 1007 |    1007 |   1007 |     100.00 |        100.00
+  DETERMINER      |  328 |     328 |    328 |     100.00 |        100.00
+  INTENSIFIER     |  179 |     179 |    179 |     100.00 |        100.00
+  MODIFIER        | 2131 |    2131 |   2131 |     100.00 |        100.00
+  MWE             |  495 |     495 |    495 |     100.00 |        100.00
+  OBJECT          |  699 |     699 |    699 |     100.00 |        100.00
+  POSSESSOR       |  570 |     570 |    570 |     100.00 |        100.00
+  PREDICATE       |  854 |     854 |    854 |     100.00 |        100.00
+  PUNCTUATION     | 1496 |    1496 |   1496 |     100.00 |        100.00
+  RELATIVIZER     |   20 |      20 |     20 |     100.00 |        100.00
+  SUBJECT         |  574 |     574 |    574 |     100.00 |        100.00
+  VOCATIVE        |   42 |      42 |     42 |     100.00 |        100.00
+
+
+  Precision and recall of DEPREL + ATTACHMENT
+
+  ----------------+------+---------+--------+------------+---------------
+  deprel          | gold | correct | system | recall (%) | precision (%) 
+  ----------------+------+---------+--------+------------+---------------
+  APPOSITION      |   13 |      13 |     13 |     100.00 |        100.00
+  ARGUMENT        |  262 |     262 |    262 |     100.00 |        100.00
+  CONJUNCTION     |  217 |     217 |    217 |     100.00 |        100.00
+  COORDINATION    |  450 |     450 |    450 |     100.00 |        100.00
+  DERIV           | 1007 |    1007 |   1007 |     100.00 |        100.00
+  DETERMINER      |  328 |     328 |    328 |     100.00 |        100.00
+  INTENSIFIER     |  179 |     179 |    179 |     100.00 |        100.00
+  MODIFIER        | 2131 |    2131 |   2131 |     100.00 |        100.00
+  MWE             |  495 |     495 |    495 |     100.00 |        100.00
+  OBJECT          |  699 |     699 |    699 |     100.00 |        100.00
+  POSSESSOR       |  570 |     570 |    570 |     100.00 |        100.00
+  PREDICATE       |  854 |     854 |    854 |     100.00 |        100.00
+  PUNCTUATION     | 1496 |    1496 |   1496 |     100.00 |        100.00
+  RELATIVIZER     |   20 |      20 |     20 |     100.00 |        100.00
+  SUBJECT         |  574 |     574 |    574 |     100.00 |        100.00
+  VOCATIVE        |   42 |      42 |     42 |     100.00 |        100.00
+
+
+  Precision and recall of binned HEAD direction
+
+  ----------------+------+---------+--------+------------+---------------
+  direction       | gold | correct | system | recall (%) | precision (%) 
+  ----------------+------+---------+--------+------------+---------------
+  to_root         |  948 |     948 |    948 |     100.00 |        100.00
+  left            | 1998 |    1998 |   1998 |     100.00 |        100.00
+  right           | 6391 |    6391 |   6391 |     100.00 |        100.00
+  self            |    0 |       0 |      0 |        NaN |           NaN
+
+
+  Precision and recall of binned HEAD distance
+
+  ----------------+------+---------+--------+------------+---------------
+  distance        | gold | correct | system | recall (%) | precision (%) 
+  ----------------+------+---------+--------+------------+---------------
+  to_root         |  948 |     948 |    948 |     100.00 |        100.00
+  1               | 5816 |    5816 |   5816 |     100.00 |        100.00
+  2               | 1088 |    1088 |   1088 |     100.00 |        100.00
+  3-6             | 1031 |    1031 |   1031 |     100.00 |        100.00
+  7-...           |  454 |     454 |    454 |     100.00 |        100.00
+
+
+  Frame confusions (gold versus system; *...* marks the head token)
+
+
+
+  0 focus words where most of the errors occur:
+
+       | any  | head | dep  | both
+  -----+------+------+------+------
+  -----+------+------+------+------
+
+
+  one-token preceeding contexts where most of the errors occur:
+
+  PPOSS | any  | head | dep  | both  ||  word | any  | head | dep  | both
+  -+------+------+------+-------++---+------+------+------+-----
+  -+------+------+------+-------++---+------+------+------+-----
+
+
+  two-token preceeding contexts where most of the errors occur:
+
+  PPOSS | any  | head | dep  | both  ||  word | any  | head | dep  | both
+  -+------+------+------+-------++---+------+------+------+-----
+  -+------+------+------+-------++---+------+------+------+-----
+
+
+  one-token following contexts where most of the errors occur:
+
+  PPOSS | any  | head | dep  | both  ||  word | any  | head | dep  | both
+  -+------+------+------+-------++---+------+------+------+-----
+  -+------+------+------+-------++---+------+------+------+-----
+
+
+  two-token following contexts where most of the errors occur:
+
+  PPOSS | any  | head | dep  | both  ||  word | any  | head | dep  | both
+  -+------+------+------+-------++---+------+------+------+-----
+  -+------+------+------+-------++---+------+------+------+-----
+
+
+  Sentence with the highest number of word errors:
+   Sentence 1 line 1, 0 head errors, 0 dependency errors, 0 word errors
+
+
+  Sentence with the highest number of head errors:
+   Sentence 1 line 1, 0 head errors, 0 dependency errors, 0 word errors
+
+
+  Sentence with the highest number of dependency errors:
+   Sentence 1 line 1, 0 head errors, 0 dependency errors, 0 word errors
+
+
+  Specific errors, 0 most frequent errors:
+  =========================================
+
+
+  Local contexts involved in several frequent errors:
+  ===================================================
+
+
+
+  ================================================================================
+
+  Evaluation of the semantic results in ./temp/system_test.conll
+  vs. gold standard ./temp/goldTest_test.conll:
+
+  Precision and recall for LABELED semantic dependencies to ROOT
+  (i.e., predicate identification and classification)
+  ----------------+------+---------+--------+------------+---------------|--------|
+  PPOSS           | gold | correct | system | recall (%) | precision (%) |     F1 | 
+  ----------------+------+---------+--------+------------+---------------|--------|
+  Acquire         |   11 |      11 |     11 |     100.00 |        100.00 | 100.00 |
+  Adj             |   19 |      19 |     19 |     100.00 |        100.00 | 100.00 |
+  Adverb          |    3 |       3 |      3 |     100.00 |        100.00 | 100.00 |
+  Verb            | 1606 |    1606 |   1606 |     100.00 |        100.00 | 100.00 |
+  Zero            |  118 |     118 |    118 |     100.00 |        100.00 | 100.00 |
+  ----------------+------+---------+--------+------------+---------------|--------|
+
+  Precision and recall for UNLABELED semantic dependencies to ROOT
+  (i.e., predicate identification)
+  ----------------+------+---------+--------+------------+---------------|--------|
+  PPOSS           | gold | correct | system | recall (%) | precision (%) |     F1 | 
+  ----------------+------+---------+--------+------------+---------------|--------|
+  Acquire         |   11 |      11 |     11 |     100.00 |        100.00 | 100.00 |
+  Adj             |   19 |      19 |     19 |     100.00 |        100.00 | 100.00 |
+  Adverb          |    3 |       3 |      3 |     100.00 |        100.00 | 100.00 |
+  Verb            | 1606 |    1606 |   1606 |     100.00 |        100.00 | 100.00 |
+  Zero            |  118 |     118 |    118 |     100.00 |        100.00 | 100.00 |
+  ----------------+------+---------+--------+------------+---------------|--------|
+
+  Precision and recall for non-ROOT semantic dependencies
+  (i.e., identification and classification of arguments)
+  ------------------+------+---------+--------+------------+---------------|--------|
+  PPOSS(pred) + ARG | gold | correct | system | recall (%) | precision (%) |     F1 | 
+  ------------------+------+---------+--------+------------+---------------|--------|
+  Acquire + A-A     |    4 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Acquire + A0      |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Acquire + A1      |    8 |       4 |      6 |      50.00 |         66.67 |  57.14 |
+  Acquire + AM-EXT  |    3 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Acquire + AM-MNR  |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Acquire + AM-TMP  |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Acquire + C-A1    |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Acquire + R-A1    |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + A0          |    3 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + A1          |   18 |      17 |     21 |      94.44 |         80.95 |  87.18 |
+  Adj + AM-ADV      |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + AM-CAU      |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + AM-DIS      |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + AM-EXT      |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + AM-GOL      |    4 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + AM-LOC      |    8 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + AM-TMP      |    2 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adj + C-A0        |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Adverb + A1       |    3 |       3 |      3 |     100.00 |        100.00 | 100.00 |
+  Adverb + AM-GOL   |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + <unk>      |    4 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + A-A        |   19 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + A0         |  495 |       1 |      2 |       0.20 |         50.00 |   0.40 |
+  Verb + A1         | 1076 |     649 |   1364 |      60.32 |         47.58 |  53.20 |
+  Verb + A2         |  201 |       0 |      2 |       0.00 |          0.00 |    NaN |
+  Verb + A3         |   45 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + A4         |   74 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-ADV     |   32 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-CAU     |   58 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-COM     |   13 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-DIR     |   12 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-DIS     |   22 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-EXT     |   56 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-GOL     |   45 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-INS     |   19 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-LOC     |  106 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-LVB     |  100 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-MNR     |  202 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-NEG     |   11 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-PRD     |   29 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-TMP     |  202 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + AM-TWO     |   13 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + C-A0       |    8 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + C-A1       |   18 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + C-A2       |    2 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + R-A0       |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Verb + R-A1       |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + A0         |   68 |       1 |      1 |       1.47 |        100.00 |   2.90 |
+  Zero + A1         |  104 |      17 |     84 |      16.35 |         20.24 |  18.09 |
+  Zero + A3         |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-ADV     |    5 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-CAU     |    3 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-DIS     |    4 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-EXT     |    7 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-GOL     |    7 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-INS     |    3 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-LOC     |   24 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-MNR     |    5 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-PRD     |    5 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + AM-TMP     |   13 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + C-A0       |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + C-A1       |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  Zero + R-A0       |    1 |       0 |      0 |       0.00 |           NaN |    NaN |
+  ------------------+------+---------+--------+------------+---------------|--------|
+

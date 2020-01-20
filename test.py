@@ -31,8 +31,8 @@ def main():
 
     localtest = False
     if localtest:
-        args.test_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-Turkish/CoNLL2009-ST-evaluation-Turkish.txt'
-        args.save_dir = 'model_srl'
+        args.test_file = '/home/sahin/Workspace/Projects/crop-rotate-augment-SRL/data/tur/evaluation.txt'
+        args.save_dir = './temp'
         args.lang = 'tur'
         args.dt = 'test'
 

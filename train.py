@@ -67,7 +67,8 @@ def run_epoch(m, data, optimizer, use_cuda=True, eval=False):
         # calculate loss for semantic roles for sure
         gold_labels = batch[1].view(log_probs.size(0))
         loss = criterion(log_probs, gold_labels).div(m.batch_size)
-        costs += loss.data[0]
+        # costs += loss.data[0]
+        costs += loss.item()
         if not eval:
             # go backwards and update weights
             loss.backward()
@@ -169,21 +170,34 @@ def main():
 
     localtest = False
     if localtest:
-        opt.train_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-Turkish/CoNLL2009-ST-Turkish-train.txt'
-        opt.val_file = '/home/sahin/Workspace/Projects/dataset_compilation/downstream_multilingual_data/srl/CoNLL2009-ST-Turkish/CoNLL2009-ST-Turkish-development.txt'
-        opt.pre_word_vecs = '/home/sahin/Workspace/Projects/dataset_compilation/saved_embeddings/extrinsic_lower/tr/fasttext/final_embeds.vec'
-        opt.word_dim = 300
-        opt.word_vec_size = 300
-        opt.batch_size = 32
-        opt.w2vtype = 'w2v'
-        opt.fixed_embed = True
-        opt.unit = 'word'
-        opt.composition = 'none'
-        opt.epochs = 20
-        opt.hidden_size = 32
-        opt.layers = 1
+        opt.train_file = '/home/sahin/Workspace/Projects/crop-rotate-augment-SRL/data/tur/development.txt'
+        opt.val_file = '/home/sahin/Workspace/Projects/crop-rotate-augment-SRL/data/tur/development.txt'
+        #opt.pre_word_vecs = '/home/sahin/Workspace/Projects/dataset_compilation/saved_embeddings/extrinsic_lower/tr/fasttext/final_embeds.vec'
+        opt.lang = "tur"
+        opt.save_dir = "./temp"
+        #opt.word_vec_size = 300
+        opt.param_init_type = "orthogonal"
+        opt.init_scale = 0.01
         opt.optim = 'sgd'
+        opt.grad_clip = 2
+        opt.dropout = 0.5
         opt.learning_rate = 1
+        opt.decay_rate = 0.5
+        opt.epochs = 20
+        opt.sub_rnn_size = 32
+        opt.sub_num_layers = 1
+        opt.unit = 'char-ngram'
+        opt.composition = 'bi-lstm'
+        opt.ngram = 3
+        opt.char_dim = 32
+        opt.morph_dim = 32
+        opt.word_dim = 32
+        opt.layers = 1
+        opt.numdir = 2
+        opt.hidden_size = 64
+        opt.wp = 1
+        opt.batch_size = 32
+        opt.max_seq_length = 200
 
 
     train(opt)
@@ -316,7 +330,7 @@ def train(opt):
                                                                                mode="train", type="simple")
 
         f1 = writeScores(num_corr_sr, num_found_sr, num_gold_sr, fout)
-        print "F1: ",f1
+        print("F1: ",f1)
 
         #  (3) update the learning rate
         optim.updateLearningRate(f1, e)
@@ -344,7 +358,7 @@ def train(opt):
 
     print("Training time: %.0f" % (time.time() - start))
     fout.write("Training time: %.0f\n" % (time.time() - start))
-    print "Cleaning"
+    print("Cleaning")
     remove_except_last_model(opt.save_dir)
 
 if __name__ == "__main__":

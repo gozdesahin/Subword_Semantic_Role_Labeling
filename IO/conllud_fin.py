@@ -73,8 +73,8 @@ class conllud_fin:
                 self.totPredCnt += csent.predcnt
                 conllsentences.append(csent)
 
-        print "%d sentences %d tokens %d predicates and %d arguments are successfully read" %(len(conllsentences),self.totTokCnt,self.totPredCnt, self.totArgCnt)
-        print "%d number of predicates with first sense" % (self.firstsense)
+        print("%d sentences %d tokens %d predicates and %d arguments are successfully read" %(len(conllsentences),self.totTokCnt,self.totPredCnt, self.totArgCnt))
+        print("%d number of predicates with first sense" % (self.firstsense))
         return conllsentences
 
 

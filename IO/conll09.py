@@ -91,14 +91,14 @@ class conll09:
 
                 self.totTokCnt += len(csent.tokens)
                 # add labels for each predicate
-                for i in xrange(predcnt):
+                for i in range(predcnt):
                     l = [row[FIXED_COL_CNT+i] for row in rows]
                     csent.labels.append(l)
                     self.totArgCnt += (len(l)-l.count("_"))
                 csent.orgRows = orgRows
                 conllsentences.append(csent)
-        print "%d sentences %d tokens %d predicates and %d arguments are successfully read" %(len(conllsentences),self.totTokCnt,self.totPredCnt, self.totArgCnt)
-        print "%d number of predicates with first sense" % (self.firstsense)
+        print("%d sentences %d tokens %d predicates and %d arguments are successfully read" %(len(conllsentences),self.totTokCnt,self.totPredCnt, self.totArgCnt))
+        print("%d number of predicates with first sense" % (self.firstsense))
         return conllsentences
 
     def mergeLabels(self, orgRow, fields):

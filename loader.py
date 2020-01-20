@@ -23,6 +23,19 @@ dtype = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
 def wrap(mylist):
     return torch.FloatTensor(mylist)
 
+def to_lower(tokenLst):
+    lowerTokLst = []
+
+    for w in tokenLst:
+        lowerTokLst.append(w.lower())
+
+    return lowerTokLst
+
+def to_float(mask):
+    float_mask = []
+    for reg in mask:
+        float_mask.append(float(reg))
+    return float_mask
 
 def prepare_sequence(seq, to_ix):
     """
@@ -31,7 +44,13 @@ def prepare_sequence(seq, to_ix):
     :param to_ix: dictionary
     :return: torch tensor of indices
     """
-    idxs = map(lambda w: to_ix[w] if (w in to_ix) else constants.UNK, seq)
+    #idxs = map(lambda w: to_ix[w] if (w in to_ix) else constants.UNK, seq)
+    idxs = []
+    for w in seq:
+        if (w in to_ix):
+            idxs.append(to_ix[w])
+        else:
+            idxs.append(constants.UNK)
     tensor = torch.LongTensor(idxs)
     return tensor
 
@@ -134,7 +153,7 @@ class Loader():
             self.c9sents = c9reader.sents
         # for each sentence
         for c9sent in self.c9sents:
-            for i in xrange(c9sent.predcnt):
+            for i in range(c9sent.predcnt):
                 # role labels
                 sroles = c9sent.labels[i]
                 for role in sroles:
@@ -164,7 +183,8 @@ class Loader():
             else:
                 tokenLst = c9sent.tokenWords
             if(len(tokenLst) <= self.options.max_seq_length):
-                tokenLst = map(lambda w: w.lower(), tokenLst)
+                #tokenLst = map(lambda w: w.lower(), tokenLst)
+                tokenLst = to_lower(tokenLst)
                 sentLst.append(tokenLst)
         return sentLst
 
@@ -194,11 +214,13 @@ class Loader():
             sentOracleLst = c9sent.tokenOracles
 
             if(len(sentTokenLst) <= self.options.max_seq_length):
-                sentTokenLst = map(lambda w: w.lower(), sentTokenLst)
-                sentOracleLst = map(lambda w: w.lower(), sentOracleLst)
+                #sentTokenLst = map(lambda w: w.lower(), sentTokenLst)
+                sentTokenLst = to_lower(sentTokenLst)
+                #sentOracleLst = map(lambda w: w.lower(), sentOracleLst)
+                sentOracleLst = to_lower(sentOracleLst)
                 numWords = len(sentTokenLst)
                 # for each predicate
-                for i in xrange(c9sent.predcnt):
+                for i in range(c9sent.predcnt):
                     predInd = c9sent.predind[i]
                     genData = []
                     # 1) tokens
@@ -239,8 +261,14 @@ class Loader():
         dataPW = []
         dataRole = []
 
+        unkWords = []
         for sentence, morph_anal, bmSeq, predWord, roles in raw_data:
-            sentence = map(lambda w:w.lower(),sentence)
+            #sentence = map(lambda w:w.lower(),sentence)
+            sentence = to_lower(sentence)
+            for w in sentence:
+                if w not in self.word_to_ix:
+                    unkWords.append(w)
+
             # predicate to lower
             predWord[0] = predWord[0].lower()
             # 1) token
@@ -257,7 +285,8 @@ class Loader():
                 sub_encoded = self.subloader.encode_data(sentence)
             dataSub.append(torch.LongTensor(sub_encoded).type(self.options.otype))
             # 3) binary mask
-            word_bin_feat = wrap(map(lambda reg: float(reg), bmSeq))
+            bmSeq = to_float(bmSeq)
+            word_bin_feat = wrap(bmSeq)
             dataBM.append(word_bin_feat)
             # 4) predicate word
             word_pred_ind = prepare_sequence(predWord, self.word_to_ix)
@@ -275,4 +304,5 @@ class Loader():
             dset = Dataset([dataTok, dataSub, dataBM, dataPW], [dataRole],
                            self.options.batch_size, use_cuda, self.ft_embeds, volatile=True)
         del dataTok, dataBM, dataPW, dataRole
+        print("Number of unknown words: %d\n" %len(unkWords))
         return dset

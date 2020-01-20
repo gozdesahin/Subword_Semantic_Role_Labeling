@@ -26,7 +26,7 @@ def writeCoNLL(outFile, ldr, lst, psenseSents=None):
     for c9sent, psenseSent in zip(ldr.c9sents, psenseSents):
         tokens = c9sent.tokens
         finSentLabs = []
-        for i in xrange(c9sent.predcnt):
+        for i in range(c9sent.predcnt):
             finPredLabs = []
             labsForPred = lst[labix].split(" ")
             for srole, tok in zip(labsForPred, tokens):
@@ -70,7 +70,7 @@ def writeCoNLLUD(outFile, ldr, lst, psenseSents=None):
     for c9sent, psenseSent in zip(ldr.c9sents, psenseSents):
         tokens = c9sent.tokens
         finSentLabs = []
-        for i in xrange(c9sent.predcnt):
+        for i in range(c9sent.predcnt):
             finPredLabs = []
             labsForPred = lst[labix].split(" ")
             for srole, tok in zip(labsForPred, tokens):
