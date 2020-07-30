@@ -55,7 +55,11 @@ class conll09:
                 # for derivational boundaries
                 prevToken = None
                 firstInDeriv = True
+
                 for line in lines:
+                    # lowercase everything for compatibility
+                    line = line.lower()
+
                     orgRows.append(line.split())
                     # create a conll09 token
                     if firstInDeriv:
@@ -77,7 +81,7 @@ class conll09:
                         prevToken.update_token(fields)
                         rows[-1] = self.mergeLabels(rows[-1],fields)
                         # workaround for words with two predicates inside
-                        if (fields[FIXED_COL_CNT-2] == 'Y'):
+                        if (fields[FIXED_COL_CNT-2] == 'Y') or (fields[FIXED_COL_CNT-2] == 'y'):
                             prevToken.ispred=True
                             csent.add_predicate(prevToken)
                         if fields[1]=="_":
@@ -166,7 +170,7 @@ class conll09token:
         self.feat = fields[6]
         self.pfeat = fields[7]
         self.deplabel = fields[10]
-        self.ispred = (fields[12]=='Y')
+        self.ispred = ((fields[12]=='Y') or (fields[12]=='y'))
         # the order of the predicate (if it is a predicate)
         # starts from 1
         self.predid = -1

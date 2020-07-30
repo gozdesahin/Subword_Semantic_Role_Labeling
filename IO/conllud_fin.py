@@ -53,6 +53,8 @@ class conllud_fin:
                 for line in lines:
                     if line.startswith(u"#"):
                         continue
+                    # lowercase everything for compatibility
+                    line = line.lower()
                     # make a new token
                     ctoken = conllUDtoken(line.split("\t"))
                     csent.add_token(ctoken)
@@ -116,13 +118,13 @@ class conllUDtoken:
         self.deplab = fields[7]
         self.deplabel = fields[7]
         self.predid = -1
-        self.predsense = u"_"
-        self.ispred = ("PBSENSE=" in fields[9])
+        self.predsense = "_"
+        self.ispred = (("PBSENSE=" in fields[9]) or ("pbsense=" in fields[9]))
         self.argInfo = fields[8]
         if self.ispred:
             fieldParts = fields[9].split("|")
             for part in fieldParts:
-                if part.startswith("PBSENSE="):
+                if (part.startswith("PBSENSE=") or part.startswith("pbsense=")):
                     sense = part[8:]
                     self.predsense = sense
         # the order of the predicate (if it is a predicate)

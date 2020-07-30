@@ -170,10 +170,10 @@ def main():
 
     localtest = False
     if localtest:
-        opt.train_file = '/home/sahin/Workspace/Projects/crop-rotate-augment-SRL/data/tur/development.txt'
-        opt.val_file = '/home/sahin/Workspace/Projects/crop-rotate-augment-SRL/data/tur/development.txt'
+        opt.train_file = '/home/ggsahin/Workspace/Data/cat/250/CI/RAT_0.3_PROB_0.3_MAX_5/train250.txt'
+        opt.val_file = '/home/ggsahin/Workspace/Code/augment-srl/data/cat/development.txt'
         #opt.pre_word_vecs = '/home/sahin/Workspace/Projects/dataset_compilation/saved_embeddings/extrinsic_lower/tr/fasttext/final_embeds.vec'
-        opt.lang = "tur"
+        opt.lang = "cat"
         opt.save_dir = "./temp"
         #opt.word_vec_size = 300
         opt.param_init_type = "orthogonal"
