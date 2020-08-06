@@ -25,7 +25,7 @@ class conllud_fin:
 
     def get_labels_for_pred(self, csent, predid):
         labels = ["_"]*len(csent.tokens)
-        strToBeFound = str(predid)+":PB"
+        strToBeFound = str(predid)+":pb"
         for i,tok in enumerate(csent.tokens):
             if strToBeFound in tok.argInfo:
                 argParts = tok.argInfo.split("|")

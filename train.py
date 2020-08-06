@@ -170,10 +170,10 @@ def main():
 
     localtest = False
     if localtest:
-        opt.train_file = '/home/ggsahin/Workspace/Data/cat/250/CI/RAT_0.3_PROB_0.3_MAX_5/train250.txt'
-        opt.val_file = '/home/ggsahin/Workspace/Code/augment-srl/data/cat/development.txt'
+        opt.train_file = '/home/ggsahin/Workspace/Code/augment-srl/data/fin/development.txt'
+        opt.val_file = '/home/ggsahin/Workspace/Code/augment-srl/data/fin/development.txt'
         #opt.pre_word_vecs = '/home/sahin/Workspace/Projects/dataset_compilation/saved_embeddings/extrinsic_lower/tr/fasttext/final_embeds.vec'
-        opt.lang = "cat"
+        opt.lang = "fin"
         opt.save_dir = "./temp"
         #opt.word_vec_size = 300
         opt.param_init_type = "orthogonal"
@@ -186,9 +186,9 @@ def main():
         opt.epochs = 20
         opt.sub_rnn_size = 32
         opt.sub_num_layers = 1
-        opt.unit = 'char-ngram'
+        opt.unit = 'char'
         opt.composition = 'bi-lstm'
-        opt.ngram = 3
+        opt.ngram = 0
         opt.char_dim = 32
         opt.morph_dim = 32
         opt.word_dim = 32
